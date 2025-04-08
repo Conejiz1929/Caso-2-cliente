@@ -1,185 +1,110 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package interfaz;
 
 import dao.EventoDAO;
 import Modelo.Evento;
-import javax.swing.table.DefaultTableModel;
-import java.util.ArrayList;
+
+import javax.swing.*;
 
 /**
  *
- * @author Conej
+ * @author José Sequeira
  */
-public class Eventos extends javax.swing.JFrame {
+public class Eventos extends JFrame {
 
-    /**
-     * Creates new form Eventos
-     */
+    private JTextField txtIdEvento, txtIdAnimal, txtTipo, txtFecha, txtEstado, txtDetalles;
+    private JButton btnGuardar;
+
     public Eventos() {
-        initComponents();
-        cargarEventos();
-    }
+        setTitle("Registrar Evento");
+        setSize(400, 300);
+        setLayout(null);
 
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+        JLabel lbl1 = new JLabel("ID Evento:");
+        lbl1.setBounds(20, 20, 100, 25);
+        add(lbl1);
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        txtIdEvento = new JTextField();
+        txtIdEvento.setBounds(140, 20, 200, 25);
+        add(txtIdEvento);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Eventos");
-        setBackground(new java.awt.Color(242, 100, 162));
-        setForeground(new java.awt.Color(204, 0, 204));
+        JLabel lbl2 = new JLabel("ID Animal:");
+        lbl2.setBounds(20, 50, 100, 25);
+        add(lbl2);
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        txtIdAnimal = new JTextField();
+        txtIdAnimal.setBounds(140, 50, 200, 25);
+        add(txtIdAnimal);
 
-        jLabel1.setFont(new java.awt.Font("Impact", 0, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Historial de Eventos");
-        jLabel1.setMinimumSize(new java.awt.Dimension(102, 18));
+        JLabel lbl3 = new JLabel("Tipo Evento:");
+        lbl3.setBounds(20, 80, 100, 25);
+        add(lbl3);
 
-        jTable1.setBackground(new java.awt.Color(0, 0, 0));
-        jTable1.setForeground(new java.awt.Color(255, 204, 51));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "id_evento", "id_animal", "tipo_evento", "fecha_evento", "estado", "detalles"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
+        txtTipo = new JTextField();
+        txtTipo.setBounds(140, 80, 200, 25);
+        add(txtTipo);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        JLabel lbl4 = new JLabel("Fecha (YYYY-MM-DD):");
+        lbl4.setBounds(20, 110, 150, 25);
+        add(lbl4);
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 102));
-        jButton1.setText("REGRESAR AL MENU PRINCIPAL");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        txtFecha = new JTextField();
+        txtFecha.setBounds(170, 110, 170, 25);
+        add(txtFecha);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(277, 277, 277)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(241, 241, 241)
-                        .addComponent(jButton1)))
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(101, Short.MAX_VALUE))
-        );
+        JLabel lbl5 = new JLabel("Estado:");
+        lbl5.setBounds(20, 140, 100, 25);
+        add(lbl5);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        txtEstado = new JTextField();
+        txtEstado.setBounds(140, 140, 200, 25);
+        add(txtEstado);
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+        JLabel lbl6 = new JLabel("Detalles:");
+        lbl6.setBounds(20, 170, 100, 25);
+        add(lbl6);
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+        txtDetalles = new JTextField();
+        txtDetalles.setBounds(140, 170, 200, 25);
+        add(txtDetalles);
 
-    private void cargarEventos() {
-        EventoDAO dao = new EventoDAO();
-        ArrayList<Evento> lista = dao.obtenerEventos();
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
+        btnGuardar = new JButton("Registrar Evento");
+        btnGuardar.setBounds(120, 210, 150, 30);
+        add(btnGuardar);
 
-        for (Evento e : lista) {
-            modelo.addRow(new Object[]{
-                e.getId_evento(),
-                e.getId_animal(),
-                e.getTipo_evento(),
-                e.getFecha_evento(),
-                e.getEstado(),
-                e.getDetalles()
-            });
-        }
-    }
+        btnGuardar.addActionListener(e -> {
+            int id_evento = Integer.parseInt(txtIdEvento.getText()); // Se obtiene el id_evento desde el campo
+            int id_animal = Integer.parseInt(txtIdAnimal.getText());
+            String tipo_evento = txtTipo.getText();
+            String fecha_evento = txtFecha.getText();
+            String estado = txtEstado.getText();
+            String detalles = txtDetalles.getText();
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Eventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+            Evento evento = new Evento(id_evento, id_animal, tipo_evento, fecha_evento, estado, detalles);
+            EventoDAO dao = new EventoDAO();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Eventos().setVisible(true);
+            if (dao.registrarEvento(evento)) {
+                JOptionPane.showMessageDialog(this, "Evento registrado correctamente");
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al registrar evento");
             }
         });
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setVisible(true);
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    // End of variables declaration//GEN-END:variables
+    private void limpiarCampos() {
+        txtIdEvento.setText("");
+        txtIdAnimal.setText("");
+        txtTipo.setText("");
+        txtFecha.setText("");
+        txtEstado.setText("");
+        txtDetalles.setText("");
+    }
 }
+

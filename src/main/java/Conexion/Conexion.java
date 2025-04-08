@@ -17,7 +17,7 @@ public class Conexion {
 
     private static final String URL = "jdbc:mysql://localhost:3306/rancho_ganadero";
     private static final String USER = "root";
-    private static final String PASSWORD = "Server"; // tu contraseña real
+    private static final String PASSWORD = "Server"; 
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);

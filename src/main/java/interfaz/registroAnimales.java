@@ -134,7 +134,7 @@ public class registroAnimales extends javax.swing.JFrame {
 
         btnGuardar.addActionListener(e -> {
             try {
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/rancho_ganadero", "root", "");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/rancho_ganadero", "root", "Server");
                 String query = "INSERT INTO animal (identificacion, raza, sexo, fecha_nacimiento, peso_nacimiento, nombre, color_pelaje, notas, es_comprado, fecha_compra, hato_origen, fotografia) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 PreparedStatement ps = conn.prepareStatement(query);
