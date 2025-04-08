@@ -15,8 +15,8 @@ import java.sql.SQLException;
 public class PruebaConexion {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/rancho_ganadero";
-        String usuario = "root"; // Reemplaza con tu usuario
-        String contrasena = "";  // Reemplaza con tu contraseña
+        String usuario = "root"; 
+        String contrasena = "Server";  
 
         try {
             Connection conexion = DriverManager.getConnection(url, usuario, contrasena);
