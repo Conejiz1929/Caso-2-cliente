@@ -8,7 +8,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author Conej
+ * @author Jose Sequeira, Sebastian Garcia, Julian Miranda, Daniel Gutierrez
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
