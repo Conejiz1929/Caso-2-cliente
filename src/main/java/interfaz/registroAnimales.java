@@ -27,7 +27,6 @@ public class registroAnimales extends javax.swing.JFrame {
 
     private void initComponents() {
         setTitle("Registro de Animal");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 600);
         setLayout(null);
 

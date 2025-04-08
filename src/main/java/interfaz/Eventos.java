@@ -4,12 +4,10 @@
  */
 package interfaz;
 
-import java.io.EOFException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import javax.swing.JOptionPane;
+import dao.EventoDAO;
+import Modelo.Evento;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,11 +20,7 @@ public class Eventos extends javax.swing.JFrame {
      */
     public Eventos() {
         initComponents();
-        // Pedir identificacion del animal
-        String idAnimal = JOptionPane.showInputDialog(this, "Ingrese la identificacion del animal:");
-        if (idAnimal != null && !idAnimal.trim().isEmpty()) {
-            cargarHistorial(idAnimal);
-        }
+        cargarEventos();
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -125,33 +119,27 @@ public class Eventos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-       
-    // Metodo para cargar historial desde el servidor
-    private void cargarHistorial(String idAnimal) {
+
+    private void cargarEventos() {
+        EventoDAO dao = new EventoDAO();
+        ArrayList<Evento> lista = dao.obtenerEventos();
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setRowCount(0);
-        try (Socket socket = new Socket("localhost", 5000);
-             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-             ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-            out.writeObject("CONSULTAR_HISTORIAL");
-            out.writeObject(idAnimal);
-
-            Object obj;
-            while ((obj = in.readObject()) != null) {
-                // asumimos que el servidor envia Object[] por fila
-                Object[] fila = (Object[]) obj;
-                modelo.addRow(fila);
-            }
-        } catch (EOFException eof) {
-            // fin de datos
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error al cargar historial: " + ex.getMessage());
+        for (Evento e : lista) {
+            modelo.addRow(new Object[]{
+                e.getId_evento(),
+                e.getId_animal(),
+                e.getTipo_evento(),
+                e.getFecha_evento(),
+                e.getEstado(),
+                e.getDetalles()
+            });
         }
     }
+
     /**
      * @param args the command line arguments
      */
