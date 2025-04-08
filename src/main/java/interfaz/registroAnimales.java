@@ -119,14 +119,7 @@ public class registroAnimales extends javax.swing.JFrame {
         btnFoto.setBounds(150, 500, 150, 25);
         add(btnFoto);
 
-        btnFoto.addActionListener(e -> {
-            JFileChooser chooser = new JFileChooser();
-            chooser.setFileFilter(new FileNameExtensionFilter("Imágenes", "jpg", "png", "jpeg"));
-            int result = chooser.showOpenDialog(null);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                imagenSeleccionada = chooser.getSelectedFile();
-            }
-        });
+        
 
         JButton btnGuardar = new JButton("Guardar");
         btnGuardar.setBounds(320, 500, 100, 25);

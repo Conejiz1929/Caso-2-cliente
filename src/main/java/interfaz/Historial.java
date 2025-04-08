@@ -44,17 +44,28 @@ public class Historial extends JFrame {
     }
 
     private void buscarHistorial() {
-        try (Socket socket = new Socket("localhost", 5000); ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream()); ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
-            out.writeObject("CONSULTAR_HISTORIAL");
-            out.writeObject(txtIdentificacion.getText());
+        try (Socket socket = new Socket("localhost", 5000); 
+             ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream()); 
+             ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
 
-            modelo.setRowCount(0); // limpiar tabla
+            String idAnimal = txtIdentificacion.getText();
+            if (idAnimal.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor ingrese el ID del animal.");
+                return;
+            }
+
+            // Enviar la solicitud para consultar el historial con el id_animal
+            out.writeObject("CONSULTAR_HISTORIAL");
+            out.writeObject(idAnimal);
+
+            modelo.setRowCount(0); // Limpiar la tabla antes de llenar con los nuevos datos
             Object[] fila;
             while ((fila = (Object[]) in.readObject()) != null) {
-                modelo.addRow(fila);
+                modelo.addRow(fila); // Agregar los resultados a la tabla
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
     }
 }
+
